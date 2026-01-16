@@ -235,11 +235,11 @@ class Tidy3DComponent(LayeredComponentBase):
         run_time: float = 10e-12,
         shutoff: float = 1e-5,
         grid_eps: float = 1e-6,
-        folder_name: str = "default",
-        path_dir: str = ".",
-        verbose: bool = True,
         symmetry: tuple[Symmetry, Symmetry, Symmetry] = (0, 0, 0),
         **kwargs,
+        # folder_name: str = "default",         Demoted in tidy 2.9x and later
+        # path_dir: str = ".", 
+        # verbose: bool = True,
     ) -> ComponentModeler:
         """Returns a ComponentModeler instance for the component.
 
@@ -259,9 +259,9 @@ class Tidy3DComponent(LayeredComponentBase):
             run_time: The run time for the ComponentModeler.
             shutoff: The shutoff value for the ComponentModeler. Defaults to 1e-5.
             grid_eps: Rounding tolerance for coordinates, e.g. port locations and layer centers (μm).
-            folder_name: The folder name for the ComponentModeler. Defaults to "default".
-            path_dir: The directory path for the ComponentModeler. Defaults to ".".
-            verbose: Whether to print verbose output for the ComponentModeler. Defaults to True.
+                # folder_name: The folder name for the ComponentModeler. Defaults to "default".
+                # path_dir: The directory path for the ComponentModeler. Defaults to ".".
+                # verbose: Whether to print verbose output for the ComponentModeler. Defaults to True.
             symmetry (tuple[Symmetry, Symmetry, Symmetry], optional): The symmetry for the simulation. Defaults to (0,0,0).
             kwargs: Additional keyword arguments for the Simulation constructor.
 
@@ -311,9 +311,6 @@ class Tidy3DComponent(LayeredComponentBase):
             freqs=tuple(freqs),
             element_mappings=element_mappings,
             run_only=run_only,
-            folder_name=folder_name,
-            path_dir=path_dir,
-            verbose=verbose,
         )
 
     @td.components.viz.add_ax_if_none
@@ -526,14 +523,12 @@ def write_sparameters(
         boundary_spec=boundary_spec,
         run_time=run_time,
         shutoff=shutoff,
-        folder_name=folder_name,
-        verbose=verbose,
         symmetry=symmetry,
         **kwargs,
     )
 
-    path_dir = pathlib.Path(dirpath) / modeler._hash_self()
-    modeler = modeler.updated_copy(path_dir=str(path_dir))
+    # path_dir = pathlib.Path(dirpath) / modeler._hash_self()
+    # modeler = modeler.updated_copy(path_dir=str(path_dir))
 
     sp = {}
 
